@@ -45,7 +45,7 @@ protected:
 	std::vector<PairwisePotential*> pairwise_;
 
 	// Don't copy this object, bad stuff will happen
-	DenseCRF( DenseCRF & o ){}
+	// DenseCRF( DenseCRF & o ){}
 public:
 	// Create a dense CRF model of size N with M labels
 	DenseCRF( int N, int M );
