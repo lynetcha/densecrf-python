@@ -5,6 +5,7 @@
 #include "densecrf.h"
 #include "objective.h"
 #include "optimization.h"
+#include "labelcompatibility.h"
 #include "crfenergy.h"
 
 namespace py=boost::python;

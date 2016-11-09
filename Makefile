@@ -14,14 +14,14 @@ NUMPY_INCLUDE = $(ANACONDA_PATH)/lib/python2.7/site-packages/numpy/core/include
 PYCONFIG_PATH = $(ANACONDA_PATH)/include/python2.7
 
 TARGET   = Pydensecrf.so
-SOURCES  = wrapper/Pydensecrf.cpp
-# SOURCES  = src/objective.cpp src/optimization.cpp src/densecrf.cpp wrapper/Pydensecrf.cpp
-INCLUDES = -I./include -I$(PYCONFIG_PATH) -I$(NUMPY_INCLUDE) -I./external/liblbfgs/include
-M_LIBRARY_PATH = -L/usr/local/lib
+# SOURCES  = wrapper/Pydensecrf.cpp
+SOURCES  = src/permutohedral.cpp src/pairwise.cpp src/util.cpp src/unary.cpp src/labelcompatibility.cpp src/objective.cpp src/optimization.cpp src/densecrf.cpp wrapper/Pydensecrf.cpp
+INCLUDES = -I./include -I./src -I$(PYCONFIG_PATH) -I$(NUMPY_INCLUDE) -I./external/liblbfgs/include
+M_LIBRARY_PATH = -L/usr/local/lib -L./external
 
 # LIBS     = -framework OpenGL -lOpenThreads -losg -losgDB -losgGA -losgViewer -losgUtil -lstdc++ -lm -lboost_python -lpython2.7
 #LIBS     = -lGL -lGLU -losg -losgDB -losgGA -losgViewer -losgUtil -lstdc++ -lm -lboost_python -lpython2.7
-LIBS     =  -lstdc++ -lboost_python -lpython2.7
+LIBS     =  -lstdc++ -lboost_python -lpython2.7 ./external/liblbfgs.a
 
 all: clean
 	$(CC) $(CFLAGS) $(LDFLAGS) $(RELEASE_FLAGS) $(SOURCES) -o $(TARGET) $(INCLUDES) $(M_LIBRARY_PATH) $(LIBS)
