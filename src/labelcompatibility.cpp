@@ -26,6 +26,9 @@
 */
 #include "labelcompatibility.h"
 
+PottsCompatibility::PottsCompatibility(PottsCompatibility * compatibility) {
+    this->setParameters(compatibility->parameters());
+}
 LabelCompatibility::~LabelCompatibility() {
 }
 void LabelCompatibility::applyTranspose( MatrixXf & out, const MatrixXf & Q ) const {

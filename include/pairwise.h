@@ -60,6 +60,7 @@ protected:
 public:
 	virtual ~PairwisePotential();
 	PairwisePotential(const MatrixXf & features, LabelCompatibility * compatibility, KernelType ktype=CONST_KERNEL, NormalizationType ntype=NORMALIZE_SYMMETRIC);
+	PairwisePotential(const MatrixXf & features, PottsCompatibility * compatibility, KernelType ktype=CONST_KERNEL, NormalizationType ntype=NORMALIZE_SYMMETRIC);
 	void apply(MatrixXf & out, const MatrixXf & Q) const;
 	void applyTranspose(MatrixXf & out, const MatrixXf & Q) const;
 	

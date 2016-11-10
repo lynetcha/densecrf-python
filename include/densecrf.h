@@ -58,6 +58,10 @@ public:
 	// (ownership of LabelCompatibility will be transfered to this class)
 	void addPairwiseEnergy( const MatrixXf & features, LabelCompatibility * function, KernelType kernel_type=DIAG_KERNEL, NormalizationType normalization_type=NORMALIZE_SYMMETRIC );
 
+	void addPairwiseEnergy( const MatrixXf & features, PottsCompatibility * function, KernelType kernel_type=DIAG_KERNEL, NormalizationType normalization_type=NORMALIZE_SYMMETRIC );
+
+
+
 	// Add your own favorite pairwise potential (ownership will be transfered to this class)
 	void addPairwiseEnergy( PairwisePotential* potential );
 

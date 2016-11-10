@@ -1,3 +1,6 @@
 *.pyc
 *.o
 tags
+*.so
+*.a
+boost_numpy_eigen

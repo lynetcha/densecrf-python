@@ -52,6 +52,7 @@ protected:
 	float w_;
 public:
 	PottsCompatibility( float weight=1.0 );
+    PottsCompatibility(PottsCompatibility * compatibility);
 	virtual void apply( MatrixXf & out_values, const MatrixXf & in_values ) const;
 	
 	// Training and parameters

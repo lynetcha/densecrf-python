@@ -15,13 +15,14 @@ PYCONFIG_PATH = $(ANACONDA_PATH)/include/python2.7
 
 TARGET   = Pydensecrf.so
 # SOURCES  = wrapper/Pydensecrf.cpp
-SOURCES  = src/permutohedral.cpp src/pairwise.cpp src/util.cpp src/unary.cpp src/labelcompatibility.cpp src/objective.cpp src/optimization.cpp src/densecrf.cpp wrapper/Pydensecrf.cpp
-INCLUDES = -I./include -I./src -I$(PYCONFIG_PATH) -I$(NUMPY_INCLUDE) -I./external/liblbfgs/include
-M_LIBRARY_PATH = -L/usr/local/lib -L./external
+SOURCES  = boost_numpy_eigen/eigen_numpy.cc src/permutohedral.cpp src/pairwise.cpp src/util.cpp src/unary.cpp src/labelcompatibility.cpp src/objective.cpp src/optimization.cpp src/densecrf.cpp wrapper/Pydensecrf.cpp
+INCLUDES = -I./include -I./src -I$(PYCONFIG_PATH) -I$(NUMPY_INCLUDE) -I/usr/include/eigen3 -I./external/liblbfgs/include -I./boost_numpy_eigen -I./boost_numpy_eigen/libs/boost.nump  -I./boost_numpy_eigen/libs/_install/include
+
+M_LIBRARY_PATH = -L/usr/local/lib -L./external -L./boost_numpy_eigen/libs/_install/lib 
 
 # LIBS     = -framework OpenGL -lOpenThreads -losg -losgDB -losgGA -losgViewer -losgUtil -lstdc++ -lm -lboost_python -lpython2.7
 #LIBS     = -lGL -lGLU -losg -losgDB -losgGA -losgViewer -losgUtil -lstdc++ -lm -lboost_python -lpython2.7
-LIBS     =  -lstdc++ -lboost_python -lpython2.7 ./external/liblbfgs.a
+LIBS     =  -lstdc++ -lboost_python -lpython2.7 ./external/liblbfgs.a -lglog -lboost_numpy 
 
 all: clean
 	$(CC) $(CFLAGS) $(LDFLAGS) $(RELEASE_FLAGS) $(SOURCES) -o $(TARGET) $(INCLUDES) $(M_LIBRARY_PATH) $(LIBS)

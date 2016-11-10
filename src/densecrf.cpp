@@ -51,7 +51,14 @@ DenseCRF2D::~DenseCRF2D() {
 /////////////////////////////////
 /////  Pairwise Potentials  /////
 /////////////////////////////////
-void DenseCRF::addPairwiseEnergy (const MatrixXf & features, LabelCompatibility * function, KernelType kernel_type, NormalizationType normalization_type) {
+void DenseCRF::addPairwiseEnergy (const MatrixXf & features, PottsCompatibility * function, KernelType kernel_type, NormalizationType normalization_type) {
+	assert( features.cols() == N_ );
+	addPairwiseEnergy( new PairwisePotential( features, function, kernel_type, normalization_type ) );
+}
+
+
+
+void DenseCRF::addPairwiseEnergy (const MatrixXf & features, gabelCompatibility * function, KernelType kernel_type, NormalizationType normalization_type) {
 	assert( features.cols() == N_ );
 	addPairwiseEnergy( new PairwisePotential( features, function, kernel_type, normalization_type ) );
 }
@@ -113,7 +120,7 @@ void sumAndNormalize( MatrixXf & out, const MatrixXf & in, const MatrixXf & Q ) 
 	}
 }
 MatrixXf DenseCRF::inference ( int n_iterations ) const {
-	MatrixXf Q( M_, N_ ), tmp1, unary( M_, N_ ), tmp2;
+    MatrixXf Q( M_, N_ ), tmp1, unary( M_, N_ ), tmp2;
 	unary.fill(0);
 	if( unary_ )
 		unary = unary_->get();
