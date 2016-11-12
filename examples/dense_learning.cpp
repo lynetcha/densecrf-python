@@ -110,6 +110,10 @@ int main( int argc, char* argv[]){
 	// Get the labeling
 	VectorXs labeling = getLabeling( anno, W*H, M );
 	const int N = W*H;
+    std::cout << labeling.rows() << std::endl;
+    std::cout << labeling.cols() << std::endl;
+    for (int k=0; k <labeling.rows();k++)
+        std::cout << labeling[k]<< std::endl;
 	
 	// Get the logistic features (unary term)
 	// Here we just use the color as a feature

@@ -1,1 +1,0 @@
-/usr/bin/c++      CMakeFiles/test_pairwise.dir/test_pairwise.cpp.o  -o test_pairwise -rdynamic ../src/libdensecrf.a ../src/liboptimization.a ../external/liblbfgs.a 

@@ -24,11 +24,21 @@
     (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
     SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
+#include <iostream>
 #include "labelcompatibility.h"
 
+
 PottsCompatibility::PottsCompatibility(PottsCompatibility * compatibility) {
+    // MatrixXf m = compatibility->w_;
+    this->w_ = compatibility->w_;
     this->setParameters(compatibility->parameters());
 }
+
+MatrixCompatibility::MatrixCompatibility(MatrixCompatibility * compatibility) {
+    this->w_ = compatibility->w_;
+    this->setParameters(compatibility->parameters());
+}
+
 LabelCompatibility::~LabelCompatibility() {
 }
 void LabelCompatibility::applyTranspose( MatrixXf & out, const MatrixXf & Q ) const {

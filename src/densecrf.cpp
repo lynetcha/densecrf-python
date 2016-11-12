@@ -56,9 +56,12 @@ void DenseCRF::addPairwiseEnergy (const MatrixXf & features, PottsCompatibility 
 	addPairwiseEnergy( new PairwisePotential( features, function, kernel_type, normalization_type ) );
 }
 
+void DenseCRF::addPairwiseEnergy (const MatrixXf & features, MatrixCompatibility * function, KernelType kernel_type, NormalizationType normalization_type) {
+	assert( features.cols() == N_ );
+	addPairwiseEnergy( new PairwisePotential( features, function, kernel_type, normalization_type ) );
+}
 
-
-void DenseCRF::addPairwiseEnergy (const MatrixXf & features, gabelCompatibility * function, KernelType kernel_type, NormalizationType normalization_type) {
+void DenseCRF::addPairwiseEnergy (const MatrixXf & features, LabelCompatibility * function, KernelType kernel_type, NormalizationType normalization_type) {
 	assert( features.cols() == N_ );
 	addPairwiseEnergy( new PairwisePotential( features, function, kernel_type, normalization_type ) );
 }
@@ -74,6 +77,26 @@ void DenseCRF2D::addPairwiseGaussian ( float sx, float sy, LabelCompatibility * 
 		}
 	addPairwiseEnergy( feature, function, kernel_type, normalization_type );
 }
+
+void DenseCRF2D::addPairwiseGaussian ( float sx, float sy, PottsCompatibility * function, KernelType kernel_type, NormalizationType normalization_type ) {
+	MatrixXf feature( 2, N_ );
+	for( int j=0; j<H_; j++ )
+		for( int i=0; i<W_; i++ ){
+			feature(0,j*W_+i) = i / sx;
+			feature(1,j*W_+i) = j / sy;
+		}
+	addPairwiseEnergy( feature, function, kernel_type, normalization_type );
+}
+void DenseCRF2D::addPairwiseGaussian ( float sx, float sy, MatrixCompatibility * function, KernelType kernel_type, NormalizationType normalization_type ) {
+	MatrixXf feature( 2, N_ );
+	for( int j=0; j<H_; j++ )
+		for( int i=0; i<W_; i++ ){
+			feature(0,j*W_+i) = i / sx;
+			feature(1,j*W_+i) = j / sy;
+		}
+	addPairwiseEnergy( feature, function, kernel_type, normalization_type );
+}
+
 void DenseCRF2D::addPairwiseBilateral ( float sx, float sy, float sr, float sg, float sb, const unsigned char* im, LabelCompatibility * function, KernelType kernel_type, NormalizationType normalization_type ) {
 	MatrixXf feature( 5, N_ );
 	for( int j=0; j<H_; j++ )
@@ -86,6 +109,34 @@ void DenseCRF2D::addPairwiseBilateral ( float sx, float sy, float sr, float sg, 
 		}
 	addPairwiseEnergy( feature, function, kernel_type, normalization_type );
 }
+
+
+void DenseCRF2D::addPairwiseBilateral ( float sx, float sy, float sr, float sg, float sb, const unsigned char* im, PottsCompatibility * function, KernelType kernel_type, NormalizationType normalization_type ) {
+	MatrixXf feature( 5, N_ );
+	for( int j=0; j<H_; j++ )
+		for( int i=0; i<W_; i++ ){
+			feature(0,j*W_+i) = i / sx;
+			feature(1,j*W_+i) = j / sy;
+			feature(2,j*W_+i) = im[(i+j*W_)*3+0] / sr;
+			feature(3,j*W_+i) = im[(i+j*W_)*3+1] / sg;
+			feature(4,j*W_+i) = im[(i+j*W_)*3+2] / sb;
+		}
+	addPairwiseEnergy( feature, function, kernel_type, normalization_type );
+}
+
+void DenseCRF2D::addPairwiseBilateral ( float sx, float sy, float sr, float sg, float sb, const unsigned char* im, MatrixCompatibility * function, KernelType kernel_type, NormalizationType normalization_type ) {
+	MatrixXf feature( 5, N_ );
+	for( int j=0; j<H_; j++ )
+		for( int i=0; i<W_; i++ ){
+			feature(0,j*W_+i) = i / sx;
+			feature(1,j*W_+i) = j / sy;
+			feature(2,j*W_+i) = im[(i+j*W_)*3+0] / sr;
+			feature(3,j*W_+i) = im[(i+j*W_)*3+1] / sg;
+			feature(4,j*W_+i) = im[(i+j*W_)*3+2] / sb;
+		}
+	addPairwiseEnergy( feature, function, kernel_type, normalization_type );
+}
+
 //////////////////////////////
 /////  Unary Potentials  /////
 //////////////////////////////

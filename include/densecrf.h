@@ -59,6 +59,7 @@ public:
 	void addPairwiseEnergy( const MatrixXf & features, LabelCompatibility * function, KernelType kernel_type=DIAG_KERNEL, NormalizationType normalization_type=NORMALIZE_SYMMETRIC );
 
 	void addPairwiseEnergy( const MatrixXf & features, PottsCompatibility * function, KernelType kernel_type=DIAG_KERNEL, NormalizationType normalization_type=NORMALIZE_SYMMETRIC );
+	void addPairwiseEnergy( const MatrixXf & features, MatrixCompatibility * function, KernelType kernel_type=DIAG_KERNEL, NormalizationType normalization_type=NORMALIZE_SYMMETRIC );
 
 
 
@@ -116,9 +117,15 @@ public:
 	virtual ~DenseCRF2D();
 	// Add a Gaussian pairwise potential with standard deviation sx and sy
 	void addPairwiseGaussian( float sx, float sy, LabelCompatibility * function=NULL, KernelType kernel_type=DIAG_KERNEL, NormalizationType normalization_type=NORMALIZE_SYMMETRIC );
+	void addPairwiseGaussian( float sx, float sy, PottsCompatibility * function=NULL, KernelType kernel_type=DIAG_KERNEL, NormalizationType normalization_type=NORMALIZE_SYMMETRIC );
+	void addPairwiseGaussian( float sx, float sy, MatrixCompatibility * function=NULL, KernelType kernel_type=DIAG_KERNEL, NormalizationType normalization_type=NORMALIZE_SYMMETRIC );
+
+
 
 	// Add a Bilateral pairwise potential with spacial standard deviations sx, sy and color standard deviations sr,sg,sb
 	void addPairwiseBilateral( float sx, float sy, float sr, float sg, float sb, const unsigned char * im, LabelCompatibility * function=NULL, KernelType kernel_type=DIAG_KERNEL, NormalizationType normalization_type=NORMALIZE_SYMMETRIC );
+	void addPairwiseBilateral( float sx, float sy, float sr, float sg, float sb, const unsigned char * im, PottsCompatibility * function=NULL, KernelType kernel_type=DIAG_KERNEL, NormalizationType normalization_type=NORMALIZE_SYMMETRIC );
+	void addPairwiseBilateral( float sx, float sy, float sr, float sg, float sb, const unsigned char * im, MatrixCompatibility * function=NULL, KernelType kernel_type=DIAG_KERNEL, NormalizationType normalization_type=NORMALIZE_SYMMETRIC );
 
 	// Set the unary potential for a specific variable
 	using DenseCRF::setUnaryEnergy;

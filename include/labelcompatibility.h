@@ -79,6 +79,7 @@ protected:
 	MatrixXf w_;
 public:
 	MatrixCompatibility( const MatrixXf & m );
+    MatrixCompatibility(MatrixCompatibility * compatibility);
 	virtual void apply( MatrixXf & out_values, const MatrixXf & in_values ) const;
 	virtual void applyTranspose( MatrixXf & out_values, const MatrixXf & in_values ) const;
 	

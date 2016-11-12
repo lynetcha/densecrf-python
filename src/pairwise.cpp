@@ -175,6 +175,14 @@ PairwisePotential::PairwisePotential(const MatrixXf & features, PottsCompatibili
     compatibility_ = new PottsCompatibility(compatibility);
 	kernel_ = new DenseKernel( features, ktype, ntype );
 }
+
+PairwisePotential::PairwisePotential(const MatrixXf & features, MatrixCompatibility * compatibility, KernelType ktype, NormalizationType ntype)  {
+    compatibility_ = new MatrixCompatibility(compatibility);
+	kernel_ = new DenseKernel( features, ktype, ntype );
+}
+
+
+
 void PairwisePotential::apply(MatrixXf & out, const MatrixXf & Q) const {
 	kernel_->apply( out, Q );
 	
