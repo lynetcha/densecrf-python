@@ -1,0 +1,3 @@
+[submodule "boost_numpy_eigen"]
+	path = boost_numpy_eigen
+	url = https://github.com/lynetcha/boost-numpy-eigen
